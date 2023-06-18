@@ -1,0 +1,31 @@
+{% extends 'product.html' %}
+
+{% block product %}
+{% for i in product %}
+<div class="product-info-1">
+  <h2>{{ i.name }}</h2><img src="{{ i.productimage_set.first.image.url }}" alt="Товар">
+</div>
+<div class="product-info-2">
+  <p>Характеристика:</p> 
+  <p>Цена: {{ i.price }} ₽</p>
+  <p>Гарантия: {{ i.warranty_months }} месяц(ев)</p>
+  <p>Бренд: {{ i.brand }}</p>
+  <p>Категория: {{ i.category }}</p>
+  <p>Материал: {{ i.material }}</p>
+  <p>Цвет: {% for color in i.productcolor_set.all %}
+    {{ color.color.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}</p>
+  <p>{% for attr in product_attributes %}
+  <p>{{ attr.attribute__name__name }}: {{ attr.value }} {{ attr.attribute__unit__unit }}</p>
+  {% endfor %}</p>
+
+</div>
+<div class="product-info-3">
+  <p>Описание: {% if i.description %}
+  {{ i.description }}
+  {% else %}
+  Отсутствует
+  {% endif %}</p>
+</div>
+{% endfor %}
+{% endblock product %}

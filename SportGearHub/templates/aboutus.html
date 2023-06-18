@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'custom.css' %}" />
+  <link rel="icon" href="{% static 'icon.ico' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap" />
+  <title>Sport Gear Hub - {{ title }}</title>
+</head>
+
+<body>
+  <header>
+    <div class="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <a href="{% url 'index' %}" class="logo">
+      <img src="{% static 'logo/logo-black.png' %}" alt="SportGearHub" /></a>
+    <div class="nav-contain">
+      <form class="search" action="{% url 'search' %}">
+        <input class="search-field" type="text" placeholder="Поиск" name="query"/>
+        <button class="search-button" type="submit"></button>
+      </form>
+      <nav>
+        <ul>
+          <li><a href="{% url 'index' %}">Главная</a></li>
+          <li><a href="{% url 'catalog' %}">Каталог</a></li>
+          <li><a href="{% url 'aboutus' %}">О нас</a></li>
+          <li><a href="{% url 'contacts' %}">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="burger-menu">
+    <div class="burger-contain">
+    <div class="burger-box">
+      <ul>
+        <li><a href="{% url 'index' %}">Главная</a></li>
+        <li><a href="{% url 'catalog' %}">Каталог</a></li>
+        <li><a href="{% url 'aboutus' %}">О нас</a></li>
+        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+        <li><a href="{% url 'index' %}#objects">Объекты</a></li>
+        <li><a href="{% url 'index' %}#manufacturers">Производители</a></li>
+        <li><a href="{% url 'help' %}">Помощь</a></li>
+      </ul>
+    </div>
+    <div class="burger-box">
+      <div class="contacts-block">
+        <h3>Наши контакты:</h3>
+        <img src="{% static 'img/telephone.png' %}" alt="Телефон"><span><strong>Телефон:</strong> 8 (835)
+          362-14-21</span><br>
+        <img src="{% static 'img/mail.png' %}" alt="Почта"><span><strong>E-mail:</strong>
+          shum-politeh@rchuv.ru</span><br>
+        <img src="{% static 'img/location.png' %}" alt="Адрес"><span><strong>Адрес:</strong> 429120,
+          Чувашская Республика
+          г. Шумерля ул. Некрасова 62</span><br>
+      </div>
+      <div class="contacts-button">
+        <a id="openModal" class="contacts-button"  href="#">Консультация</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <main>
+    <div id="modal" class="modal">
+      <div class="forma">
+        <h2>Окно связи<span class="close">&times;</span></h2>
+        <form id="feedback-form">
+          {% csrf_token %}
+          <div class="form-column">
+            <label for="feed">Тип обращения*</label>
+            <select id="feed" name="feed">
+              <option value='1'>Вопрос</option>
+              <option value='2'>Консультация</option>
+              <option value='3'>Заказ</option>
+              <option value='4'>Отзыв</option>
+            </select>
+          </div>
+          <div class="form-column">
+            <p></p>
+          </div>
+          <div class="form-column">
+            <label for="firstName">Имя*</label>
+            <input placeholder="Введите имя" type="text" id="firstName" name="firstName" required />
+          </div>
+          <div class="form-column">
+            <label for="lastName">Фамилия</label>
+            <input placeholder="Введите фамилию" type="text" id="lastName" name="lastName" />
+          </div>
+          <div class="form-column">
+            <label for="email">Почта*</label>
+            <input placeholder="Введите E-mail" type="email" id="email" name="email" required />
+          </div>
+          <div class="form-column">
+            <label for="phone">Телефон</label>
+            <input placeholder="Введите номер телефона" type="tel" id="phone" name="phone" pattern="^\+?[0-9]{1,3}\s?[-]?\(?[0-9]{3}\)?[-\s]?[0-9]{3}[-\s]?[0-9]{2}[-\s]?[0-9]{2}$"/>
+          </div>
+          <div class="form-column">
+            <label for="message">Сообщение*</label>
+            <textarea placeholder="Текст" id="message" name="message" required></textarea>
+          </div>
+          <div class="form-row">
+            <input type="checkbox" id="agreement" name="agreement" required />
+            <label for="agreement">Я прочитал и принимаю пользовательское соглашение</label>
+          </div>
+          <div class="form-row">
+            <button type="submit">Отправить</button>
+          </div>
+        </form>
+        <button class="reset-btn" id="reset-btn" type="submit">Сбросить</button>
+      </div>
+    </div>
+    <div class="mapbar">
+      <section aria-labelledby="catalog-section-title">
+        <h2 id="catalog-section-title">О нас</h2>
+        <p><a href="{% url 'index' %}">Главная</a> - <a href="{% url 'aboutus' %}">О нас</a></p>
+      </section>
+    </div>
+    <div class="box">
+      <div class="aboutus">
+        <div class="aboutus-img">
+          <div class="alter-logo">
+            <p>Официальный поставщик <br>оборудования на территории России</p>
+          </div>
+        </div>
+        <div class="aboutus-text">
+          <p>Мы - крупная компания, занимающаяся продажей спортивного оборудования в России и за ее пределами. Наша
+            компания состоит из нескольких складов по всей России и мы имеем партнерские отношения с компаниями из
+            разных стран, которые представляют различные бренды спортивного оборудования.</p>
+          <p>Наша цель - предоставить нашим клиентам широкий выбор высококачественного оборудования для спортивных залов
+            и фитнес-центров, а также для домашнего использования. </p>
+          <p>Мы работаем только с проверенными брендами и гарантируем качество поставляемого нами оборудования. Наша
+            команда профессионалов всегда готова помочь вам с выбором оборудования и предоставить необходимые
+            консультации. Мы находимся на переднем крае инноваций в индустрии спортивного оборудования и готовы
+            предложить нашим клиентам самые современные и эффективные тренажеры. </p>
+          <p>Благодаря нашей работе нашим клиентам доступен широкий выбор оборудования по конкурентоспособным ценам, а
+            также оперативная и надежная доставка.</p>
+        </div>
+      </div>
+      <div class="content-5">
+        <div class="content-5-1">
+          <div class="contacts">
+            <div class="contacts-block">
+              <h3>Наши контакты:</h3>
+              <img src="{% static 'img/telephone.png' %}" alt="Телефон"><span><strong>Телефон:</strong> 8 (835)
+                362-14-21</span><br>
+              <img src="{% static 'img/mail.png' %}" alt="Почта"><span><strong>E-mail:</strong>
+                shum-politeh@rchuv.ru</span><br>
+              <img src="{% static 'img/location.png' %}" alt="Адрес"><span><strong>Адрес:</strong> 429120,
+                Чувашская Республика
+                г. Шумерля ул. Некрасова 62</span><br>
+            </div>
+            <div class="contacts-button"><a href="#" id="openModal">Консультация</a></div>
+          </div>
+          <div class="map">
+            <script type="text/javascript" charset="utf-8" async
+              src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9d5fa1d023b3896cf8d6a0409c95e13e3342b3ad2493a595e827aec9299e8329&amp;width=700&amp;height=500&amp;lang=ru_RU&amp;scroll=true"></script>
+          </div>
+        </div>
+      </div>
+  </main>
+  <footer>
+    <div class="footer-block">
+      <h5>© SportGearHub — Официальный поставщик оборудования на территории России</h5>
+    </div>
+    <div class="footer-block">
+      <ul>
+        <li><a href="{% url 'privacy' %}"><u>Политика Конфиденциальности</u></a></li>
+        <li><a href="{% url 'privacy' %}"><u>Пользовательское соглашение</u></a></li>
+      </ul>
+    </div>
+    <div class="footer-block">
+      <a href=""><img src="{% static 'img/vk.png' %}" alt="ВКонтакте"></a>
+      <a href=""><img src="{% static 'img/whatsapp.png' %}" alt="WhatsApp"></a>
+      <a href=""><img src="{% static 'img/instagram.png' %}" alt="Intagram"></a>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="{% static 'itc-slider.js' %}"></script>
+  <script src="{% static 'custom.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+{% extends 'products.html' %}
+
+{% block sort_a %}
+<input type="hidden" name="sort_state_a" value="{{ sort_state_a }}">
+<input type="submit" name="sort-a" value="По альфавиту {% if sort_state_a == 'asc' %}▼{% elif sort_state_a == 'desc' %}▲{% endif %}">
+{% endblock sort_a%}
+
+{% block sort_b %}
+<input type="hidden" name="sort_state_b" value="{{ sort_state_b }}">
+<input type="submit" name="sort-b" value="По цене {% if sort_state_b == 'asc' %}▼{% elif sort_state_b == 'desc' %}▲{% endif %}">
+{% endblock sort_b%}
+
+{% block producer %}
+<option value="" {% if 0 == brand_selected %}selected{% endif %} >Все {{ i.name }} {% if 0 == brand_selected %}✔{% endif %}</option>
+{% for i in producer %}
+<option value="{{ i.brand_id }}" {% if i.brand_id == brand_selected %}selected{% endif %} >{{ i.name }} {% if i.brand_id == brand_selected %}✔{% endif %}</option>
+{% endfor %}
+{% endblock producer %}
+
+{% block category %}
+<option value="" {% if 0 == category_selected %}selected{% endif %} >Все {% if 0 == category_selected %}✔{% endif %}</option>
+{% for i in category %}
+<option value="{{ i.category_id }}" {% if i.category_id == category_selected %}selected{% endif %} >{{ i.name }} {% if i.category_id == category_selected %}✔{% endif %}</option>
+{% endfor %}
+{% endblock category %}
+
+{% block material %}
+<option value="" {% if 0 == material_selected %}selected{% endif %} >Все {{ i.name }} {% if 0 == material_selected %}✔{% endif %}</option>
+{% for i in material %}
+<option value="{{ i.material_id }}" {% if i.material_id == material_selected %}selected{% endif %} >{{ i.name }} {% if i.material_id == material_selected %}✔{% endif %}</option>
+{% endfor %}
+{% endblock material %}
+
+{% block color %}
+<option value="" {% if 0 == color_selected %}selected{% endif %} >Все {{ i.name }} {% if 0 == color_selected %}✔{% endif %}</option>
+{% for i in color %}
+<option value="{{ i.color_id }}" {% if i.color_id == color_selected %}selected{% endif %} >{{ i.name }} {% if i.color_id == color_selected %}✔{% endif %}</option>
+{% endfor %}
+{% endblock color %}
+
+{% block products %}
+{% for i in products %}
+<div class="product-img"><a href="/catalog/product/{{i.product_id}}"><div class="product-img-box"><img src="{{ i.productimage_set.first.image.url }}" alt="Товар"></div><div class="product-img-box"><p><b>{{ i.name }}</b></p><p>Цена: {{i.price }} ₽</p></div></a></div>
+{% endfor %}
+{% for i in bonus %}
+<div class="product-img-fake"><p></p></div>
+{% endfor %}
+{% endblock products %}
